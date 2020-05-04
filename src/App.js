@@ -31,17 +31,21 @@ function App() {
         ];
 
         winningCombinations.forEach((combo) => {
-            const filteredXArray = combo.filter(
-                (index) => board[index] === 'x'
-            );
-            const filteredOArray = combo.filter(
-                (index) => board[index] === 'o'
-            );
-            if (filteredXArray.length === 3) {
-                winner(roundIsX);
-            }
-            if (filteredOArray.length === 3) {
-                winner(roundIsX);
+            if (
+                !combo
+                    .map((index) => board[index])
+                    .find((square) => square === 'empty')
+            ) {
+                const filteredXArray = combo.filter(
+                    (index) => board[index] === 'x'
+                );
+
+                if (
+                    filteredXArray.length === 3 ||
+                    filteredXArray.length === 0
+                ) {
+                    winner(roundIsX);
+                }
             }
         });
     }
