@@ -5,6 +5,7 @@ import Board from './Board';
 function App() {
     const [board, setBoard] = useState(Array(9).fill('empty'));
     const [roundIsX, setRoundIsX] = useState(true);
+    const [whoWon, setWon] = useState('');
 
     function updateBoard(index) {
         //Clone board, insert value at index, set board
@@ -30,16 +31,19 @@ function App() {
             [6, 4, 2],
         ];
 
+        //Iterate through winning index combinations
         winningCombinations.forEach((combo) => {
+            //Check combinations that have no empty squares then continue
             if (
                 !combo
                     .map((index) => board[index])
                     .find((square) => square === 'empty')
             ) {
+                //Filter the X values of completed combos
                 const filteredXArray = combo.filter(
                     (index) => board[index] === 'x'
                 );
-
+                //Determins if there is a winner
                 if (
                     filteredXArray.length === 3 ||
                     filteredXArray.length === 0
@@ -48,15 +52,20 @@ function App() {
                 }
             }
         });
+        //Is the game over? Is there a winner? Happens after loop above
+        if (!board.find((element) => element === 'empty')) {
+            console.log(`${whoWon ? `${whoWon} is the winner` : `No winner`}`);
+        }
     }
 
     function winner(roundIsX) {
         console.log(`${roundIsX ? 'x' : 'o'} has won!`);
+        setWon(roundIsX ? 'x' : 'o');
     }
 
     return (
         <div className="h-screen flex items-center justify-center">
-            <Board helper={updateBoard} round={roundIsX} />
+            <Board updateBoard={updateBoard} round={roundIsX} winner={whoWon} />
         </div>
     );
 }
