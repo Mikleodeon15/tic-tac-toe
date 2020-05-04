@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 import Board from './Board';
 
@@ -7,13 +7,14 @@ function App() {
     const [roundIsX, setRoundIsX] = useState(true);
 
     function updateBoard(index) {
-        //Add state of particular square to board state
         const clonedBoard = [...board];
-        clonedBoard[index] = 'x';
+        clonedBoard[index] = roundIsX ? 'x' : 'o';
         setBoard(clonedBoard);
         const nextRound = roundIsX ? false : true;
         setRoundIsX(nextRound);
     }
+
+    useEffect(() => {});
 
     return (
         <div className="h-screen flex items-center justify-center">

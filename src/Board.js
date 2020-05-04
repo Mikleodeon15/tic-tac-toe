@@ -9,7 +9,7 @@ const Board = (props) => {
 
     const styles = {
         boardContainer:
-            'border-t-2 border-r-2 border-red-400 border-opacity-50 mx-auto inline-block',
+            'border-t-2 border-r-2 border-red-400 border-opacity-50 mx-auto inline-block shadow-xl',
         board: 'grid grid-cols-3 grid-row-6',
     };
 
