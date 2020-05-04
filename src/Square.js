@@ -10,10 +10,12 @@ const Square = ({ updateBoard, index, round, winner, borderColor }) => {
 
     //Is there already a winner? Has this square already been set?
     function clickMe() {
+        let newRound;
         if (!winner) {
             if (!state) {
                 updateBoard(index);
-                setState(round ? 'X' : 'O');
+                newRound = round ? 'X' : 'O';
+                setState(newRound);
             }
         }
     }

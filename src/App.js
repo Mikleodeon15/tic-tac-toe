@@ -7,7 +7,6 @@ const App = () => {
     const [board, setBoard] = useState(Array(9).fill('empty'));
     const [roundIsX, setRoundIsX] = useState(true);
     const [whoWon, setWon] = useState('');
-    let newWin;
 
     //Callback that's triggered when clicking a square
     function updateBoard(index) {
@@ -23,6 +22,7 @@ const App = () => {
     }
 
     function checkWinner(board) {
+        let newWin;
         //Rows, columns, diagonal
         const winningCombinations = [
             [0, 1, 2],
@@ -59,7 +59,6 @@ const App = () => {
         });
         //Is the game over? Is there a winner? Happens after loop above
         if (!board.find((element) => element === 'empty')) {
-            console.log(`${newWin ? `${newWin} is the winner` : `No winner`}`);
             if (!newWin) {
                 setWon('no win');
             }
