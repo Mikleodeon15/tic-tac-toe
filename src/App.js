@@ -11,18 +11,19 @@ const App = () => {
     //Callback that's triggered when clicking a square
     function updateBoard(index) {
         //Clone board, insert value at index, set board
-        const clonedBoard = [...board];
-        clonedBoard[index] = roundIsX ? 'x' : 'o';
-        setBoard(clonedBoard);
+        const currentBoard = [...board];
+        currentBoard[index] = roundIsX ? 'x' : 'o';
+        setBoard(currentBoard);
         //Switch then set round back and forth
         const nextRound = roundIsX ? false : true;
         setRoundIsX(nextRound);
         //Check if game has a winner
-        checkWinner(clonedBoard);
+        checkWinner(currentBoard);
     }
 
     function checkWinner(board) {
         let newWin;
+
         //Rows, columns, diagonal
         const winningCombinations = [
             [0, 1, 2],
@@ -60,13 +61,14 @@ const App = () => {
         //Is the game over? Is there a winner? Happens after loop above
         if (!board.find((element) => element === 'empty')) {
             if (!newWin) {
-                setWon('no win');
+                newWin = 'no win';
+                setWon(newWin);
             }
         }
     }
 
     const styles = {
-        screen: 'h-screen flex items-center justify-center',
+        screen: 'h-screen flex flex-col items-center',
     };
 
     return (
